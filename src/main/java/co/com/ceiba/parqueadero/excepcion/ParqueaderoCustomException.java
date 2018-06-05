@@ -1,13 +1,13 @@
 package co.com.ceiba.parqueadero.excepcion;
 
-public class ParqueaderoExcepcion extends RuntimeException{
+public class ParqueaderoCustomException extends RuntimeException{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public ParqueaderoExcepcion(String mensaje) {
+	public ParqueaderoCustomException(String mensaje) {
 		super(mensaje);
 	}
 }

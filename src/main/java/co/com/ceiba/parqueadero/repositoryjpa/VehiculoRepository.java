@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import co.com.ceiba.parqueadero.entidades.VehiculoEntidad;
 
-
 public interface VehiculoRepository extends JpaRepository<VehiculoEntidad, Integer>{
 	
 	List<VehiculoEntidad> findAll();
@@ -16,4 +15,6 @@ public interface VehiculoRepository extends JpaRepository<VehiculoEntidad, Integ
 	VehiculoEntidad findByPlacaAllIgnoreCase(String placa);
 	
 	VehiculoEntidad findByPlacaAllIgnoreCaseAndParqueado(String placa, boolean esParqueado);
+	
+	long countByTipoAllIgnoreCaseAndParqueado(String tipo, boolean esParqueado);
 }

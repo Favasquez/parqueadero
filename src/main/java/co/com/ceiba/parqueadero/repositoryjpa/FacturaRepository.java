@@ -13,5 +13,7 @@ public interface FacturaRepository extends JpaRepository<FacturaEntidad,Integer>
 	@Query("SELECT factura FROM Facturas factura WHERE factura.vehiculoEntidad.id = :idVehiculo AND factura.fechaSalida IS NULL")
 	FacturaEntidad findBillToUpdate(@Param("idVehiculo") int idVehiculo);
 	
+	
+	
 	List<FacturaEntidad> findAll();
 }

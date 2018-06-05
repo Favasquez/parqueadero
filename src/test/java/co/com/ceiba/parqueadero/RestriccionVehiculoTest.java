@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import co.com.ceiba.parqueadero.excepcion.ParqueaderoExcepcion;
+import co.com.ceiba.parqueadero.excepcion.ParqueaderoCustomException;
 import co.com.ceiba.parqueadero.validaciones.RestriccionVehiculo;
 
 
@@ -37,7 +37,7 @@ public class RestriccionVehiculoTest {
 		//act
 		try {
 			restriccionVehiculo.verificarPlaca(PLACA_CON_A, LUNES);
-		}catch(ParqueaderoExcepcion e){
+		}catch(ParqueaderoCustomException e){
 			//No exception can be thrown
 			fail();
 		}
@@ -49,7 +49,7 @@ public class RestriccionVehiculoTest {
 		
 		try {
 			restriccionVehiculo.verificarPlaca(PLACA_SIN_A, LUNES);
-		}catch(ParqueaderoExcepcion e){
+		}catch(ParqueaderoCustomException e){
 			//No exception can be thrown
 			fail();
 		}
@@ -62,7 +62,7 @@ public class RestriccionVehiculoTest {
 		//act
 		try {
 			restriccionVehiculo.verificarPlaca(PLACA_CON_A, DOMINGO);
-		}catch(ParqueaderoExcepcion e) {
+		}catch(ParqueaderoCustomException e) {
 			//No exception can be thrown
 			fail();
 		}
@@ -75,7 +75,7 @@ public class RestriccionVehiculoTest {
 		//act
 		try {
 			restriccionVehiculo.verificarPlaca(PLACA_SIN_A, DOMINGO);
-		}catch(ParqueaderoExcepcion e) {
+		}catch(ParqueaderoCustomException e) {
 			//No exception can be thrown
 			fail();
 		}
@@ -89,7 +89,7 @@ public class RestriccionVehiculoTest {
 		try {
 			restriccionVehiculo.verificarPlaca(PLACA_CON_A, MIERCOLES);
 			fail();
-		}catch(ParqueaderoExcepcion e) {
+		}catch(ParqueaderoCustomException e) {
 			assertEquals(PLACA_EN_DIA_NO_HABIL, e.getMessage());
 		}
 	}

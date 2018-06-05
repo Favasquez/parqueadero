@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import co.com.ceiba.parqueadero.dominio.Factura;
 import co.com.ceiba.parqueadero.dominio.Precios;
+import co.com.ceiba.parqueadero.dominio.Vehiculo;
 import co.com.ceiba.parqueadero.persistencia.PreciosPersistencia;
 
 @Service
@@ -27,8 +28,8 @@ public class VigilanteCalculos {
 		
 		Precios precios = preciosPersistencia.traerPrecios();
 		double horas = calcularHoras(factura.getFechaIngreso(), factura.getFechaSalida());
-		
-		if(factura.getVehiculo().getTipo().equals(TIPO_CARRO)) {
+		Vehiculo vehiculo = factura.getVehiculo();
+		if(vehiculo.getTipo().equalsIgnoreCase(TIPO_CARRO)) {
 			return calcularCosto(horas,precios.getValorHoraCarro(),precios.getValorDiaCarro(),CILINDRAJE_CERO);
 		}
 		
@@ -51,14 +52,10 @@ public class VigilanteCalculos {
 		double restoHoras = 0;
 		int dias = 0;
 		double recargo = (cilindraje > LIMITE_CILINDRAJE) ? INCREMENTO : 0;
-		
 		dias = (int)(horas / HORAS_DIA);
-		
 		restoHoras = Math.ceil(((horas / HORAS_DIA) % 1)*24);
-		
 		double costoPorDia = (double) dias * precioDia;
 		double costoPorHora = (restoHoras < MIN_HORAS)? restoHoras * precioHora : precioDia;
-		
 		return costoPorDia + costoPorHora + recargo;
 	}
 	

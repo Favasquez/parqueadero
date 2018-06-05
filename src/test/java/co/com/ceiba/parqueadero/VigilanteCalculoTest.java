@@ -100,4 +100,26 @@ public class VigilanteCalculoTest {
 		//assert
 		assertEquals(costoEsperado,resultado,0.0);
 	}
+	
+	@Test
+	public void calcularOchoHorasYMinutos() {
+		
+		//arrange
+		double horas = 8.01;
+		long precioDia = 8000;
+		long precioHora = 1000;
+		int cilindraje = 0;
+		
+		//act
+		double result = vigilanteCalculos.calcularCosto(horas, precioHora, precioDia, cilindraje);
+		double expected = 8000;
+		
+		//assert
+		assertEquals(result,expected,0.0);
+	}
 }
+
+	
+	
+	
+	

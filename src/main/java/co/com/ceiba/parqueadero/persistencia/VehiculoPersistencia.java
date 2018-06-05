@@ -36,6 +36,10 @@ public class VehiculoPersistencia {
 		return vehiculoEntidad != null ? vehiculoEntidad:null;
 	}
 	
+	public long cantidadTipoVehiculo(String tipo, boolean esParqueado) {
+		return vehiculoRepository.countByTipoAllIgnoreCaseAndParqueado(tipo, esParqueado);
+	}
+	
 	public List<Vehiculo> list() {
 		List<Vehiculo> motos = new ArrayList<>();
 		vehiculoRepository.findAll().forEach(moto -> 
