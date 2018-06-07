@@ -19,8 +19,8 @@ public class RestriccionVehiculo {
 	private static final String PLACA_EN_DIA_NO_HABIL = "La placa ingresa en día no hábil";
 	private static final String VEHICULO_NO_PARQUEADO = "El vehiculo no está en el parqueadero";
 	private static final String NO_HAY_LOTES_DISPONIBLES = "No hay lotes disponibles";
-	private static final String MOTO = "Moto";
-	private static final String CARRO = "Carro";
+	public static final String MOTO = "Moto";
+	public static final String CARRO = "Carro";
 	private static final int LUNES = 2;
 	private static final int DOMINGO = 1;
 	private static final long CANTIDAD_MAX_MOTOS = 10;
