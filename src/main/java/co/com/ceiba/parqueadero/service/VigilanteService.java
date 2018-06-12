@@ -35,8 +35,12 @@ public class VigilanteService {
     	facturaPersistencia.registrarFactura(vehiculo);
 	}
 	
-	public List<Vehiculo> reporteVehiculos(){
-		return vehiculoPersistencia.list();
+	public List<Vehiculo> reporteVehiculosCarros(){
+		return vehiculoPersistencia.listarCarros();
+	}
+	
+	public List<Vehiculo> reporteVehiculosMotos(){
+		return vehiculoPersistencia.listarMotos();
 	}
 	
 	public void retirarVehiculo(String placa) {

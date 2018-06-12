@@ -10,11 +10,13 @@ public interface VehiculoRepository extends JpaRepository<VehiculoEntidad, Integ
 	
 	List<VehiculoEntidad> findAll();
 	
+	List<VehiculoEntidad> findByTipoAndParqueado(String tipo, boolean esParqueado);
+	
 	VehiculoEntidad findById(int id);
 	
 	VehiculoEntidad findByPlacaAllIgnoreCase(String placa);
 	
 	VehiculoEntidad findByPlacaAllIgnoreCaseAndParqueado(String placa, boolean esParqueado);
-	
+		
 	long countByTipoAllIgnoreCaseAndParqueado(String tipo, boolean esParqueado);
 }

@@ -35,7 +35,7 @@ public class VigilanteCalculos {
 		
 		return calcularCosto(horas,precios.getValorHoraMoto(),precios.getValorDiaMoto(),factura.getVehiculo().getCilindraje());
 	}
-	
+
 	public double calcularHoras(Date inicio, Date fin) {
 		
 		Calendar fechaInicio = Calendar.getInstance();

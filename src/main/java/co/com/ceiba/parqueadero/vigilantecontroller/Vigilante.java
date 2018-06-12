@@ -36,9 +36,14 @@ public class Vigilante {
     	vigilanteService.ingresarVehiculo(vehiculo);
     }
     
-    @RequestMapping(value = "/vehiculosregistrados", method = RequestMethod.GET)
-    public @ResponseBody List<Vehiculo> reporteVehiculos(){
-    	return vigilanteService.reporteVehiculos();
+    @RequestMapping(value = "/vehiculosregistrados/carros", method = RequestMethod.GET)
+    public @ResponseBody List<Vehiculo> reportarCarros(){
+    	return vigilanteService.reporteVehiculosCarros();
+    }
+    
+    @RequestMapping(value = "/vehiculosregistrados/motos", method = RequestMethod.GET)
+    public @ResponseBody List<Vehiculo> reportarMotos(){
+    	return vigilanteService.reporteVehiculosMotos();
     }
 
     @PostMapping("/retirarvehiculo")

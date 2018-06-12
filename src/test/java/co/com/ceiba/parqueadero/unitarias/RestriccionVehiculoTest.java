@@ -7,10 +7,12 @@ import static org.junit.Assert.fail;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -27,6 +29,7 @@ public class RestriccionVehiculoTest {
 	private static final String PLACA_CON_A = "ABC123";
 	private static final String PLACA_SIN_A = "XYZ123";
 	private static final String PLACA_EN_DIA_NO_HABIL = "La placa ingresa en día no hábil";
+	private static final String VEHICULO_YA_PARQUEADO = "El vehiculo ya se encuentra parqueado";
 	private static final int DOMINGO = 1;
 	private static final int LUNES = 2;
 	private static final int MIERCOLES = 4;
@@ -35,20 +38,59 @@ public class RestriccionVehiculoTest {
 	RestriccionVehiculo restriccionVehiculo;
 	
 	@Mock
-	VehiculoPersistencia vehiculoPersistencia;	
+	VehiculoPersistencia vehiculoPersistencia;
+	
+	
+	
 
+	@Before
+    public void setUp() throws Exception {
+         MockitoAnnotations.initMocks(this);
+    }
+	
 	@Test
 	public void verificarIngresoVehiculoTest() {
 		//arrange
-		final String TIPO = RestriccionVehiculo.CARRO;
 		Vehiculo vehiculo = new VehiculoTestDataBuilder().build();
 		
 		when(vehiculoPersistencia.buscarPorPlaca(vehiculo.getPlaca()))
 			.thenReturn(vehiculo);
 		
 		//act
-		Vehiculo sameVehiculo = vehiculoPersistencia.buscarPorPlaca(vehiculo.getPlaca());
+		Vehiculo sameVehiculo = restriccionVehiculo.verificarIngresoVehiculo(vehiculo);
 		
+		//assert
+		assertEquals(vehiculo,sameVehiculo);
+		verify(vehiculoPersistencia).buscarPorPlaca(vehiculo.getPlaca());
+	}
+	
+	@Test
+	public void verificarIngresoVehiculoParqueado() {
+		//arrange
+		Vehiculo vehiculo = new VehiculoTestDataBuilder().withParqueado(true).build();
+		
+		when(vehiculoPersistencia.buscarPorPlaca(vehiculo.getPlaca()))
+			.thenReturn(vehiculo);
+		 
+		try {
+			restriccionVehiculo.verificarIngresoVehiculo(vehiculo);
+			fail();
+		}catch(Exception e){
+			assertEquals(VEHICULO_YA_PARQUEADO, e.getMessage());
+		}
+	}
+	
+	@Test
+	public void verificarSalidaVehiculoTest() {
+		//arrange
+		Vehiculo vehiculo = new VehiculoTestDataBuilder().withParqueado(true).build();
+		
+		when(vehiculoPersistencia.buscarPorPlaca(vehiculo.getPlaca())).thenReturn(vehiculo);
+		
+		//act
+		Vehiculo sameVehiculo = restriccionVehiculo.verificarSalidaVehiculo(vehiculo.getPlaca());
+		
+		//assert
 		assertEquals(vehiculo,sameVehiculo);
 		verify(vehiculoPersistencia).buscarPorPlaca(vehiculo.getPlaca());
 	}
@@ -89,7 +131,7 @@ public class RestriccionVehiculoTest {
 		//assert
 		verify(vehiculoPersistencia).cantidadTipoVehiculo(TIPO,ES_PARQUEADO);
 		assertFalse(result);
-	}
+	} 
 	
 	@Test
 	public void hayLotesDisponiblesCarroTest() {

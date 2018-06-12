@@ -42,7 +42,7 @@ public class RestriccionVehiculo {
 		
 		vehiculo = vehiculoPersisted;
 		return vehiculo;
-	}
+	}	 
 	
 	public Vehiculo verificarSalidaVehiculo(String placa) {
 	    Vehiculo vehiculoPersisted = vehiculoPersistencia.buscarPorPlaca(placa);

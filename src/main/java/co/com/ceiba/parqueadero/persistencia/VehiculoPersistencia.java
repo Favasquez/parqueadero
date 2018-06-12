@@ -14,38 +14,49 @@ import co.com.ceiba.parqueadero.util.VehiculoConvertidor;
 @Service
 public class VehiculoPersistencia {
 	
+	private static final String CARRO = "Carro";
+	private static final String MOTO = "Moto";
+	private static final boolean PARQUEADO = true;
 	@Autowired
 	VehiculoRepository vehiculoRepository;
 	
 	VehiculoConvertidor vehiculoConvertidor = new VehiculoConvertidor();
-	
+	 
 	public void parquear(Vehiculo vehiculo) {
 		
 		VehiculoEntidad vehiculoEntidad = vehiculoConvertidor.convertiraEntity(vehiculo);
 		vehiculoEntidad.setParqueado(true);
 		vehiculoRepository.save(vehiculoEntidad);
 	}
-	
+	 
 	public Vehiculo buscarPorPlaca(String placa) {
 		VehiculoEntidad vehiculoEntidad = vehiculoRepository.findByPlacaAllIgnoreCase(placa);
 		return vehiculoEntidad != null ? vehiculoConvertidor.convertiraDomain(vehiculoEntidad):null;
 	}
 	
-	public VehiculoEntidad buscarPorPlacaYParqueado(String placa, boolean esParqueado) {
+	public Vehiculo buscarPorPlacaYParqueado(String placa, boolean esParqueado) {
 		VehiculoEntidad vehiculoEntidad = vehiculoRepository.findByPlacaAllIgnoreCaseAndParqueado(placa, esParqueado);
-		return vehiculoEntidad != null ? vehiculoEntidad:null;
+		return vehiculoEntidad != null ? vehiculoConvertidor.convertiraDomain(vehiculoEntidad):null;
 	}
 	
 	public long cantidadTipoVehiculo(String tipo, boolean esParqueado) {
 		return vehiculoRepository.countByTipoAllIgnoreCaseAndParqueado(tipo, esParqueado);
 	}
 	
-	public List<Vehiculo> list() {
-		List<Vehiculo> motos = new ArrayList<>();
-		vehiculoRepository.findAll().forEach(moto -> 
-			motos.add(vehiculoConvertidor.convertiraDomain(moto))
+	public List<Vehiculo> listarCarros() {
+		List<Vehiculo> vehiculos = new ArrayList<>();
+		vehiculoRepository.findByTipoAndParqueado(CARRO, PARQUEADO).forEach(vehiculo -> {
+				vehiculos.add(vehiculoConvertidor.convertiraDomain(vehiculo));}
 		);
-		return motos;
+		return vehiculos;
+	}
+	
+	public List<Vehiculo> listarMotos(){
+		List<Vehiculo> vehiculos = new ArrayList<>();
+		vehiculoRepository.findByTipoAndParqueado(MOTO, PARQUEADO).forEach(vehiculo -> {
+				vehiculos.add(vehiculoConvertidor.convertiraDomain(vehiculo));}
+		);
+		return vehiculos;
 	}
 	
 	public void retirar(Vehiculo vehiculo) {

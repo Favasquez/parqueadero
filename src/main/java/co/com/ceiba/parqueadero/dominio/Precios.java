@@ -12,7 +12,7 @@ public class Precios {
 	}
 
 	public Precios(int id, long valorHoraCarro, long valorDiaCarro, long valorHoraMoto, long valorDiaMoto) {
-		super();
+
 		this.id = id;
 		this.valorHoraCarro = valorHoraCarro;
 		this.valorDiaCarro = valorDiaCarro;

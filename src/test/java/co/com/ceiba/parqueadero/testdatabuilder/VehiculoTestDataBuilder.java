@@ -6,15 +6,15 @@ public class VehiculoTestDataBuilder {
 	
 	private static final int ID = 1;
 	private static final String PLACA = "XYZ123";
-	private static final String TIPO = "Moto";
-	private static final int CILINDRAJE = 150;
+	private static final String TIPO = "Carro";
+	private static final int CILINDRAJE = 0;
 	private static final boolean PARQUEADO = false;
 	
 	private int id;
 	private String placa;
 	private String tipo;
 	private int cilindraje;
-	private boolean parqueado;
+	private boolean parqueado; 
 	
 	public VehiculoTestDataBuilder() {
 		this.id = ID;
@@ -24,8 +24,8 @@ public class VehiculoTestDataBuilder {
 		this.parqueado = PARQUEADO;
 	}
 	
-	public VehiculoTestDataBuilder withPlaca(String placa) {
-		this.placa = placa;
+	public VehiculoTestDataBuilder withPlaca(String placaUno) {
+		this.placa = placaUno;
 		return this;
 	}
 	
@@ -43,7 +43,7 @@ public class VehiculoTestDataBuilder {
 		this.parqueado = parqueado;
 		return this;
 	}
-	
+	 
 	public Vehiculo build(){
 		return new Vehiculo(this.id,this.placa,this.tipo,this.cilindraje,this.parqueado);
 	}
