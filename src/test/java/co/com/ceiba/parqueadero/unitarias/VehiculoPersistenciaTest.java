@@ -2,11 +2,11 @@ package co.com.ceiba.parqueadero.unitarias;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +15,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -31,6 +30,7 @@ public class VehiculoPersistenciaTest {
 
 	private static final String PLACA = "XYZ123";
 	private static final String TIPO_CARRO = "Carro";
+	private static final String TIPO_MOTO = "Moto";
 	private static final boolean PARQUEADO = true;
 	 
 	
@@ -48,7 +48,7 @@ public class VehiculoPersistenciaTest {
 	@Test
 	public void parquearVehiculoTest() {
 		//arrange
-		Vehiculo vehiculo = new VehiculoTestDataBuilder().build();
+		Vehiculo vehiculo = new VehiculoTestDataBuilder().withParqueado(PARQUEADO).build();
 		when(vehiculoRepository.save(Mockito.any())).thenReturn(Mockito.any());
 		
 		vehiculoPersistencia.parquear(vehiculo);
@@ -100,6 +100,54 @@ public class VehiculoPersistenciaTest {
 		assertEquals(expected, result);
 	}
 	
+	@Test
+	public void listarCarrosTest() {
+		
+		//arrange
+		VehiculoEntidad mock = Mockito.mock(VehiculoEntidad.class);
+		List<VehiculoEntidad> list = Arrays.asList(mock);
+		when(vehiculoRepository.findByTipoAndParqueado(TIPO_CARRO, PARQUEADO)).thenReturn(list);
+		
+		//act
+		List<Vehiculo> resultList = vehiculoPersistencia.listarCarros();
+		
+		//assert
+		verify(vehiculoRepository).findByTipoAndParqueado(TIPO_CARRO, PARQUEADO);
+		assertEquals(list.size(), resultList.size());
+	}
+	
+	@Test
+	public void listarMotosTest() {
+		//arrange
+		VehiculoEntidad mock = Mockito.mock(VehiculoEntidad.class);
+		List<VehiculoEntidad> list = Arrays.asList(mock);
+		when(vehiculoRepository.findByTipoAndParqueado(TIPO_MOTO, PARQUEADO)).thenReturn(list);
+		
+		//act
+		List<Vehiculo> resultList = vehiculoPersistencia.listarMotos();
+		
+		//assert
+		verify(vehiculoRepository).findByTipoAndParqueado(TIPO_MOTO, PARQUEADO);
+		assertEquals(list.size(), resultList.size());
+	}
+	
+	@Test
+	public void retirarVehiculoTest() {
+		
+		//arrange
+		VehiculoEntidad vehiculoEntidad = Mockito.mock(VehiculoEntidad.class);
+		
+		when(vehiculoRepository.findByPlacaAllIgnoreCase(PLACA)).thenReturn(vehiculoEntidad);
+		when(vehiculoRepository.save(vehiculoEntidad)).thenReturn(vehiculoEntidad);
+		
+		Vehiculo vehiculo = new VehiculoTestDataBuilder().withParqueado(true).build();
+
+		//act
+		vehiculoPersistencia.retirar(vehiculo);
+		
+		//assert
+		verify(vehiculoRepository).save(vehiculoEntidad);
+	}
 }
 
 

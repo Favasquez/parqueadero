@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -12,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -63,6 +65,29 @@ public class RestriccionVehiculoTest {
 		assertEquals(vehiculo,sameVehiculo);
 		verify(vehiculoPersistencia).buscarPorPlaca(vehiculo.getPlaca());
 	}
+	
+//	@Test
+//	public void verificarIngresoCarroSinLotes() {
+//		
+//		//arrange
+//		Vehiculo vehiculo = new VehiculoTestDataBuilder().build();
+//		RestriccionVehiculo restriccionVehiculoMock = Mockito.mock(RestriccionVehiculo.class);
+//		
+//		doNothing().when(restriccionVehiculoMock).verificarPlaca(Mockito.eq(PLACA_SIN_A),Mockito.anyInt());
+//		when(restriccionVehiculoMock.hayLotesDisponibles(TIPO_CARRO)).thenReturn(false);
+//		
+//		//act
+//		try {
+//			restriccionVehiculoMock.verificarIngresoVehiculo(vehiculo);
+//			fail();
+//		}catch(ParqueaderoCustomException ex) {
+//			assertEquals(NO_HAY_LOTES_DISPONIBLES, ex.getMessage());
+//		}
+//		
+//		
+//		
+//		
+//	}
 	
 	@Test
 	public void verificarIngresoVehiculoParqueado() {

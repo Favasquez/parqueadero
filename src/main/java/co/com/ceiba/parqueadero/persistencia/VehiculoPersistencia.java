@@ -45,16 +45,16 @@ public class VehiculoPersistencia {
 	
 	public List<Vehiculo> listarCarros() {
 		List<Vehiculo> vehiculos = new ArrayList<>();
-		vehiculoRepository.findByTipoAndParqueado(CARRO, PARQUEADO).forEach(vehiculo -> {
-				vehiculos.add(vehiculoConvertidor.convertiraDomain(vehiculo));}
+		vehiculoRepository.findByTipoAndParqueado(CARRO, PARQUEADO).forEach(vehiculo -> 
+				vehiculos.add(vehiculoConvertidor.convertiraDomain(vehiculo))
 		);
 		return vehiculos;
 	}
 	
 	public List<Vehiculo> listarMotos(){
 		List<Vehiculo> vehiculos = new ArrayList<>();
-		vehiculoRepository.findByTipoAndParqueado(MOTO, PARQUEADO).forEach(vehiculo -> {
-				vehiculos.add(vehiculoConvertidor.convertiraDomain(vehiculo));}
+		vehiculoRepository.findByTipoAndParqueado(MOTO, PARQUEADO).forEach(vehiculo -> 
+				vehiculos.add(vehiculoConvertidor.convertiraDomain(vehiculo))
 		);
 		return vehiculos;
 	}

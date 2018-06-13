@@ -21,14 +21,14 @@ public class VehiculoConvertidorTest {
 	private VehiculoConvertidor vehiculoConvertidor;
 	private Vehiculo vehiculo;
 	private VehiculoEntidad vehiculoEntidad;
-	private VehiculoTestDataBuilder vehiculoTDB;
+	
 	
 	
 	@Before
 	public void setUp() {
 		vehiculoConvertidor = new VehiculoConvertidor();
 	}
-	
+	 
 	@Test
 	public void convertirAEntidadTest() {
 		//arrange

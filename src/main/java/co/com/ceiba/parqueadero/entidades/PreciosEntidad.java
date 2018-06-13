@@ -18,25 +18,25 @@ public class PreciosEntidad {
 	
 	@NotNull
 	@Column
-	private Long valorHoraCarro;
+	private long valorHoraCarro;
 	
 	@NotNull
 	@Column
-	private Long valorDiaCarro;
+	private long valorDiaCarro;
 	
 	@NotNull
 	@Column
-	private Long valorHoraMoto;
+	private long valorHoraMoto;
 	
 	@NotNull
 	@Column
-	private Long valorDiaMoto;
+	private long valorDiaMoto;
 	
 	public PreciosEntidad() {
 		
 	}
 	
-	public PreciosEntidad(int id, Long valorHoraCarro, Long valorDiaCarro, Long valorHoraMoto, Long valorDiaMoto) {
+	public PreciosEntidad(int id, long valorHoraCarro, long valorDiaCarro, long valorHoraMoto, long valorDiaMoto) {
 		super();
 		this.id = id;
 		this.valorHoraCarro = valorHoraCarro;
@@ -53,35 +53,35 @@ public class PreciosEntidad {
 		this.id = id;
 	}
 
-	public Long getValorHoraCarro() {
+	public long getValorHoraCarro() {
 		return valorHoraCarro;
 	}
 
-	public void setValorHoraCarro(Long valorHoraCarro) {
+	public void setValorHoraCarro(long valorHoraCarro) {
 		this.valorHoraCarro = valorHoraCarro;
 	}
 
-	public Long getValorDiaCarro() {
+	public long getValorDiaCarro() {
 		return valorDiaCarro;
 	}
 
-	public void setValorDiaCarro(Long valorDiaCarro) {
+	public void setValorDiaCarro(long valorDiaCarro) {
 		this.valorDiaCarro = valorDiaCarro;
 	}
 
-	public Long getValorHoraMoto() {
+	public long getValorHoraMoto() {
 		return valorHoraMoto;
 	}
 
-	public void setValorHoraMoto(Long valorHoraMoto) {
+	public void setValorHoraMoto(long valorHoraMoto) {
 		this.valorHoraMoto = valorHoraMoto;
 	}
 
-	public Long getValorDiaMoto() {
+	public long getValorDiaMoto() {
 		return valorDiaMoto;
 	}
 
-	public void setValorDiaMoto(Long valorDiaMoto) {
+	public void setValorDiaMoto(long valorDiaMoto) {
 		this.valorDiaMoto = valorDiaMoto;
 	}
 }
